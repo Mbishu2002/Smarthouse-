@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  smart-home-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${{ secrets.DOCKER_USERNAME }}/smart-home-app:latest
+    ports:
+      - "5000:80"
+    environment:
+      - DATABASE_URL=postgresql://admin:12345@db:5432/smarthome
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: smarthome
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ${{ secrets.DOCKER_USERNAME }}/smart-home-app:latest
+    image: ${{ secrets.DOCKER_USERNAME }}/smarthouse:latest
     ports:
       - "5000:80"
     environment:
